@@ -89,24 +89,24 @@ export default function CarList() {
     return width;
   }
 
+  const screenWidth = useScreenWidth();
+
+  const isOneColLayout = screenWidth < 768;        
+  const isTwoColLayout = screenWidth >= 768 && screenWidth < 1024; 
+  const isThreeColLayout = screenWidth >= 1024 && screenWidth < 1280; // lg
+  const isFourColLayout = screenWidth >= 1280;
+
+  let groupSize = 1;
+
+  if (isTwoColLayout) groupSize = 2;
+  else if (isThreeColLayout) groupSize = 3;
+  else if (isFourColLayout) groupSize = 4;
+
+
   return (
     // flex justify-center gap-6 mb-12
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-12 mb-12 lg:mb-24">
       {carData.map((car, index) => {
-        const isEven = index % 2 === 0;
-        
-        const screenWidth = useScreenWidth();
-        const isOneColLayout = screenWidth < 768;        
-        const isTwoColLayout = screenWidth >= 768 && screenWidth < 1024; 
-        const isThreeColLayout = screenWidth >= 1024 && screenWidth < 1280; // lg
-        const isFourColLayout = screenWidth >= 1280;
-        
-        let groupSize = 1;
-
-        if (isTwoColLayout) groupSize = 2;
-        else if (isThreeColLayout) groupSize = 3;
-        else if (isFourColLayout) groupSize = 4;
-
         const rowIndex = Math.floor(index / groupSize);
         const isEvenRow = rowIndex % 2 === 0;
 
@@ -120,7 +120,6 @@ export default function CarList() {
           carOrderClass = isEvenRow ? "order-2" : "order-1";
           barOrderClass = isEvenRow ? "order-1" : "order-2";
         }
-
 
         return (
           <div key={index} className="flex justify-center items-start gap-6 w-full">

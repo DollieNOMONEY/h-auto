@@ -5,7 +5,7 @@ import CarBrandButton from '@/components/CarBrandButton'
 import CarList from '@/components/CarList'
 import Footer from "@/components/Footer";
 
-export default function cars() {
+export default function Cars() {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {

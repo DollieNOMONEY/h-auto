@@ -27,7 +27,7 @@ export default function Navigation() {
                     <Link href="/">
                         <Image
                         src="/img/logo/logo.jpg"
-                        alt="M-Auto"
+                        alt="H-Auto"
                         width={590}
                         height={590}
                         className='object-contain w-10'
