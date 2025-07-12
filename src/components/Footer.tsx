@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTelegramPlane, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
-
 export default function Footer() {
   const [animate, setAnimate] = useState(false);
 
@@ -24,9 +23,31 @@ export default function Footer() {
                     <p className='text-white text-md mb-5 underline break-words'>Cnr Mao Tse Toung Blvd (St: 245) & St 202 Phnom Penh Cambodia</p>
                     <p className='text-white text-md mb-5 underline break-words'>+855 12 236 789</p>
                     <div className="flex gap-4 text-white text-2xl">
-                      <FontAwesomeIcon icon={faTelegramPlane} />
-                      <FontAwesomeIcon icon={faFacebookF} />
-                      <FontAwesomeIcon icon={faInstagram} />
+                      <a
+                        href="https://t.me/KIM_HENG_016"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="transition-transform transition-shadow duration-300 ease-out
+                                   hover:scale-110 hover:shadow-lg
+                                   active:scale-95 active:shadow-md
+                                   touch-action-manipulation"
+                      >
+                        <FontAwesomeIcon icon={faTelegramPlane} />
+                      </a>
+
+                      <a
+                        href="https://www.facebook.com/KHKSKSKE"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="transition-transform transition-shadow duration-300 ease-out
+                                   hover:scale-110 hover:shadow-lg
+                                   active:scale-95 active:shadow-md
+                                   touch-action-manipulation"
+                      >
+                        <FontAwesomeIcon icon={faFacebookF} />
+                      </a>
+                      
+                      {/* <FontAwesomeIcon icon={faInstagram} /> */}
                     </div>
                 </div>
             </div>

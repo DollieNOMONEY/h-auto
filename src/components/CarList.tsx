@@ -110,6 +110,10 @@ export default function CarList() {
         const rowIndex = Math.floor(index / groupSize);
         const isEvenRow = rowIndex % 2 === 0;
 
+        const colIndex = index % groupSize;
+        const isOnRightSide = colIndex === 2 || colIndex === groupSize - 1;
+
+
         let carOrderClass = "";
         let barOrderClass = "";
 
@@ -122,7 +126,14 @@ export default function CarList() {
         }
 
         return (
-          <div key={index} className="flex justify-center items-start gap-6 w-full">
+          <div key={index} 
+          className={`flex justify-center items-start gap-6 w-full transition-all duration-300 ease-out transform 
+            hover:scale-105 hover:shadow-lg
+            active:scale-95 active:shadow-md
+            focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2
+            ${isOnRightSide ? "origin-right" : "origin-left"}
+            }`}
+          >
             <Link href={car.href} className={`w-[75%] block cursor-pointer ${carOrderClass}`}>
               <Image
                 className="w-fit mb-7"

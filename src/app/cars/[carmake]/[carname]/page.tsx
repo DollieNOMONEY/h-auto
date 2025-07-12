@@ -42,10 +42,19 @@ export default function CarPage() {
                   Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
                   <br/><br/>Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
               </p>
-              <button className={`flex items-center justify-center gap-4 w-full lg:w-64 bg-[#daab35] rounded-full px-4 py-3 text-white text-lg mb-10 transition-all duration-700 ${animate ? 'fade-in delay-1000' : 'opacity-0 translate-y-5'}`}>
+              <a
+                className={`flex items-center justify-center gap-4 w-full lg:w-64 bg-[#daab35] rounded-full px-4 py-3 text-white text-lg mb-10 transition-all duration-300 ease-out transform 
+                hover:scale-105 hover:shadow-lg 
+                active:scale-95 active:shadow-md 
+                focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2 
+                ${animate ? 'fade-in' : 'opacity-0 translate-y-5'}`}
+                href="https://t.me/KIM_HENG_016"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 <FontAwesomeIcon icon={faTelegramPlane} className="w-8"/>
                 Contact via Telegram
-              </button>
+              </a>
           </div>
        </div>
         <Footer/>

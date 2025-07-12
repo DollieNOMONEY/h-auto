@@ -31,7 +31,16 @@ export default function Home() {
                 <h1 className={`relative text-5xl mt-12 ml-4 mb-2 z-10 font-serif lg:text-7xl xl:text-8xl transition-all duration-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{ transitionDelay: '100ms' }}>Quality</h1>
                 <h1 className={`relative text-5xl ml-4 mb-2 z-10 font-serif lg:text-7xl xl:text-8xl transition-all duration-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{ transitionDelay: '300ms' }}>Honesty</h1>
                 <h1 className={`relative text-5xl ml-4 mb-12 z-10 font-serif lg:text-7xl xl:text-8xl transition-all duration-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{ transitionDelay: '500ms' }}>Trust</h1>
-                <Link href="/cars" className={`bg-[#daab35] py-2 px-1 font-bold border-[1px] ml-5 text-sm lg:text-lg lg:py-3 lg:px-2 transition-all duration-500 ${animate ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '700ms' }}>DRIVE NOW</Link>
+                <Link
+                href="/cars"
+                className={`inline-block bg-[#daab35] py-2 px-1 font-bold border-[1px] ml-5 text-sm lg:text-lg lg:py-3 lg:px-2 transition-all duration-300 ease-out transform
+                  hover:scale-105 hover:shadow-lg 
+                  active:scale-95 active:shadow-md 
+                  focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2 
+                  ${animate ? 'fade-in' : 'opacity-0 translate-y-5'}`}
+              >
+                DRIVE NOW
+              </Link>
               </div>
               <div className={`w-1/2 transition-opacity duration-1000 ${animate ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '900ms' }}>
               <Image className="block w-full h-72 lg:h-96 xl:h-[40rem] object-cover object-left"
@@ -50,13 +59,16 @@ export default function Home() {
           <div>
           </div>
           <div className="text-center mb-24">
-          <Link 
-            href="/cars"
-            className={`tracking-widest bg-[#daab35] py-4 px-4 font-bold underline text-black border-[1px] border-white transition-opacity duration-500 ${animate ? 'opacity-100' : 'opacity-0'}`}
-            style={{ transitionDelay: '700ms' }}
-            >
-            SHOP MORE
-          </Link>
+            <Link
+                href="/cars"
+                className={`tracking-widest inline-block text-black border-white underline bg-[#daab35] py-4 px-4 font-bold border-[1px] ml-5 text-sm lg:text-lg lg:py-3 lg:px-2 transition-all duration-300 ease-out transform
+                  hover:scale-105 hover:shadow-lg 
+                  active:scale-95 active:shadow-md 
+                  focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2 
+                  ${animate ? 'fade-in' : 'opacity-0 translate-y-5'}`}
+              >
+                SHOP MORE
+              </Link>
           </div>
         </div>
       </div>

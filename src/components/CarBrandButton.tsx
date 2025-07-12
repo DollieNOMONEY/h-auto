@@ -9,7 +9,13 @@ type Props = {
 
 export default function CarBrandButton({name, image}: Props) {
   return (
-    <div className='relative inline-flex h-14 align-middle gap-5 bg-[#00000054] py-4 px-2 mb-2 mr-2'>
+    <div className="relative inline-flex h-14 align-middle gap-5 bg-[#00000054] py-4 px-2 mb-2 mr-2
+        cursor-pointer
+        transition-transform transition-shadow duration-300 ease-out
+        hover:scale-105 hover:shadow-lg
+        active:scale-95 active:shadow-md
+        focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2"
+    >
       <Image
         src={image}
         alt={name}
