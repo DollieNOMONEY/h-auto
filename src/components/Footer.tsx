@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTelegramPlane, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faTelegramPlane, faFacebookF } from '@fortawesome/free-brands-svg-icons'
 
 export default function Footer() {
   const [animate, setAnimate] = useState(false);
