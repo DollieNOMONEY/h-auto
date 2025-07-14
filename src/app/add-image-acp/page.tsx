@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Navigation from "@/components/Navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTelegramPlane } from "@fortawesome/free-brands-svg-icons";
 
 export default function AddImage() {
   const [animate, setAnimate] = useState(false);
