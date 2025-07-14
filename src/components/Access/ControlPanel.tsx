@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link';
 import React from 'react';
 import { useState } from 'react'
 
@@ -16,8 +17,7 @@ export default function Ctrl() {
           <div className='fixed -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 bg-[#001135] p-12'
           onClick={(e) => e.stopPropagation()}>
             <div className='flex flex-col justify-center'>
-              <button className="bg-[#daab35] py-2 px-1 font-bold border-[1px] text-sm mb-4">+ Add Image</button>
-              <button className="bg-[#daab35] py-2 px-1 font-bold border-[1px] text-sm">+ Edit Page</button>
+              <Link href="/add-image-acp" className="bg-[#daab35] py-2 px-1 font-bold border-[1px] text-sm mb-4">+ Add Image</Link>
             </div>
           </div>
         </div>
