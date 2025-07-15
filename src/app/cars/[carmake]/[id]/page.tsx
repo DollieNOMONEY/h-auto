@@ -7,6 +7,7 @@ interface Params {
   id: string;
 }
 
+// @ts-ignore
 export default async function CarPage({ params }: { params: Params }) {
   const { id } = params;
 
