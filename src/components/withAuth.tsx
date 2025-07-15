@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const withAuth = <P extends object>(Component: React.ComponentType<P>) => {
   return function ProtectedRoute(props: P) {
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const router = useRouter();
     const [isOwner, setIsOwner] = useState(false);
 

@@ -13,7 +13,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 function EditCarForm({ initialData }: { initialData: CarWithBrand }) {
   const { edgestore } = useEdgeStore();
   const router = useRouter();
-  const [animate, setAnimate] = useState(false);
+  const [_animate, setAnimate] = useState(false);
 
   // Form state initialized with existing car data
   const [carName, setCarName] = useState(initialData.name);

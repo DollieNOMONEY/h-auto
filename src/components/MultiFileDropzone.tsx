@@ -159,7 +159,7 @@ const MultiFileDropzone = React.forwardRef<HTMLInputElement, InputProps>(
     { dropzoneOptions, value, className, disabled, onChange, onFilesAdded },
     ref,
   ) => {
-    const [customError, setCustomError] = React.useState<string>();
+    const [customError, _setCustomError] = React.useState<string>();
     if (dropzoneOptions?.maxFiles && value?.length) {
       disabled = disabled ?? value.length >= dropzoneOptions.maxFiles;
     }

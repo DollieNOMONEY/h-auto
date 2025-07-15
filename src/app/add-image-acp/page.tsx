@@ -100,7 +100,7 @@ function AddImage() {
               file: fileState.file!,
             });
             return res.url;
-          } catch (err) {
+          } catch (_err) {
             updateFileProgress(fileState.key, 'ERROR');
             return null;
           }
