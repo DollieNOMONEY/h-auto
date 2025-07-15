@@ -13,7 +13,7 @@ import { useEdgeStore } from "@/lib/edgestore";
 function EditCarForm({ initialData }: { initialData: CarWithBrand }) {
   const { edgestore } = useEdgeStore();
   const router = useRouter();
-  const [_animate, setAnimate] = useState(false);
+  const [animate, setAnimate] = useState(false);
 
   // Form state initialized with existing car data
   const [carName, setCarName] = useState(initialData.name);
@@ -58,6 +58,7 @@ function EditCarForm({ initialData }: { initialData: CarWithBrand }) {
   }, [initialData.imageUrls]);
 
   useEffect(() => { setAnimate(true); }, []);
+  console.log(animate);
 
   const handleBrandChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
