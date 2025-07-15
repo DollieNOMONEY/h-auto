@@ -8,7 +8,7 @@ import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 export default function ControlPanel() {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [openPanel, setOpenPanel] = useState(false);
   const router = useRouter();
 
