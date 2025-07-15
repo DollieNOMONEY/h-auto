@@ -37,7 +37,7 @@ export default function Cars() {
             <div className='mb-6'/>
             <div>
               <h1 className={`relative text-4xl mt-12 ml-4 mb-12 z-10 font-serif ${animate ? 'fade-in delay-500' : 'opacity-0'}`}>
-                IN STOCK
+                ALL CARS
               </h1>
              <div className={`${animate ? 'fade-in delay-700' : 'opacity-0'}`}>
                 <CarList/>

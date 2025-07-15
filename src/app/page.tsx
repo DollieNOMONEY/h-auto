@@ -6,7 +6,6 @@ import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import CarList from "@/components/CarList";
 import Footer from "@/components/Footer";
-import ControlPanel from "@/components/Access/ControlPanel";
 
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -21,7 +20,6 @@ export default function Home() {
 
   return (
     <>
-    <ControlPanel/>
     <div className={`bg-[#001135] ${animate ? "fade-in" : ""}`}>
       <Navigation/>
       <div className="h-[20rem] lg:h-auto">
@@ -52,16 +50,17 @@ export default function Home() {
             </div>
          </div>
       </div>
+      
       <div className="inset-0 lg:flex items-center justify-center">
         <div className="flex flex-col bg-[#000d2a]">
-          <h1 className={`relative text-4xl mt-12 ml-4 mb-12 z-10 font-serif sm:text-center transition-all duration-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{ transitionDelay: '500ms' }}>IN STOCK</h1>
+          <h1 className={`mr-5 relative text-4xl mt-12 ml-4 mb-12 z-10 font-serif sm:text-center transition-all duration-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{ transitionDelay: '500ms' }}>GARAGE</h1>
           <CarList/>
           <div>
           </div>
           <div className="text-center mb-24">
             <Link
                 href="/cars"
-                className={`tracking-widest inline-block text-black border-white underline bg-[#daab35] py-4 px-4 font-bold border-[1px] ml-5 text-sm lg:text-lg lg:py-3 lg:px-2 transition-all duration-300 ease-out transform
+                className={`mr-5 tracking-widest inline-block text-black border-white underline bg-[#daab35] py-4 px-4 font-bold border-[1px] ml-5 text-sm lg:text-lg lg:py-3 lg:px-2 transition-all duration-300 ease-out transform
                   hover:scale-105 hover:shadow-lg 
                   active:scale-95 active:shadow-md 
                   focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2 

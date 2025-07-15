@@ -1,4 +1,3 @@
-// app/cars/[carmake]/page.tsx
 "use client"
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation'
@@ -17,7 +16,16 @@ export default function CarMakePage() {
   const rawCarmake = params.carmake;
   const carmake = Array.isArray(rawCarmake) ? rawCarmake[0] : rawCarmake;
 
-  if (!carmake) return null;
+  if (!carmake) {
+    return (
+        <div className="bg-[#001135] min-h-screen">
+            <Navigation />
+            <p className="text-center text-white mt-24">Loading...</p>
+        </div>
+    );
+  }
+
+  const decodedCarmake = decodeURIComponent(carmake);
 
   return (
     <div className={`bg-[#001135] ${animate ? "fade-in" : ""}`}>
@@ -30,10 +38,12 @@ export default function CarMakePage() {
           }`}
           style={{ transitionDelay: '500ms' }}
         >
-          {carmake.charAt(0).toUpperCase() + carmake.slice(1)} Cars
+          {decodedCarmake.charAt(0).toUpperCase() + decodedCarmake.slice(1)} Cars
         </p>
         <div className={`transition-opacity duration-1000 ${animate ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '900ms' }}>
-          <CarList />
+          
+          {decodedCarmake && <CarList brandName={decodedCarmake} />}
+
         </div>
       </div>
 
