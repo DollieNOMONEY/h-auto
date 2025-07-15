@@ -2,10 +2,12 @@ import { getCarById } from "@/app/_actions/carActions";
 import CarDetailClient from "@/components/CarDetailClient";
 import { notFound } from "next/navigation";
 
-export default async function CarPage(props: any // ← use `any` to bypass broken type constraint
-) {
-  const { id } = props.params;
+interface CarDetailPageProps {
+  params: { carmake: string; id: string };
+}
 
+export default async function CarPage(props: CarDetailPageProps) {
+  const { id } = await props.params;
 
   const { success, data: car } = await getCarById(id);
 
