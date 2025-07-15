@@ -7,15 +7,14 @@ interface Params {
   id: string;
 }
 
-// @ts-ignore
-export default async function CarPage({ params }: { params: Params }) {
+export default async function CarPage({
+  params,
+}: {
+  params: { carmake: string; id: string };
+}) {
   const { id } = params;
-
   const { success, data: car } = await getCarById(id);
-
-  if (!success || !car) {
-    notFound();
-  }
+  if (!success || !car) notFound();
 
   return <CarDetailClient car={car} />;
 }
