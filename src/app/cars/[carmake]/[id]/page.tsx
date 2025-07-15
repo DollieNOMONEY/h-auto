@@ -7,7 +7,7 @@ interface CarDetailPageProps {
 }
 
 export default async function CarPage(props: CarDetailPageProps) {
-  const { id } = await props.params;
+  const { id } = props.params;
 
   const { success, data: car } = await getCarById(id);
 
