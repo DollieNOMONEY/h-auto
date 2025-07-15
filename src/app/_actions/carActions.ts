@@ -52,7 +52,8 @@ export async function createCarListing(data: NewCarData) {
       createdAt: new Date(),
     });
     return { success: true, docId: docRef.id };
-  } catch (_error) {
+  } catch (error) {
+    console.error("Something went wrong:", error);
     return { success: false, error: "Failed to create listing." };
   }
 }
@@ -112,7 +113,8 @@ export async function getCars(filters?: { brandName?: string; listOtherBrands?: 
       })
     );
     return { success: true, data: carsWithBrands as CarWithBrand[] };
-  } catch (_error) {
+  } catch (error) {
+    console.error("Something went wrong:", error);
     return { success: false, error: "Failed to fetch cars." };
   }
 }
@@ -162,11 +164,12 @@ export async function deleteCar(carId: string, imageUrls: string[]) {
 export async function updateCar(carId: string, data: UpdateCarData) {
   try {
     const { urlsToDelete, ...updateData } = data;
-    if (data.urlsToDelete && data.urlsToDelete.length > 0) {
+    if (urlsToDelete && urlsToDelete.length > 0) {
       await Promise.all(
-        data.urlsToDelete.map(url => backendClient.carImages.deleteFile({ url }))
+        urlsToDelete.map((url) => backendClient.carImages.deleteFile({ url }))
       );
     }
+
     await firestore.collection("cars").doc(carId).update({
       ...updateData,
       updatedAt: new Date(),
