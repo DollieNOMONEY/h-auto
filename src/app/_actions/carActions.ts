@@ -57,36 +57,59 @@ export async function createCarListing(data: NewCarData) {
     return { success: false, error: "Failed to create listing." };
   }
 }
-
 export async function getCars(filters?: { brandName?: string; listOtherBrands?: boolean }) {
   try {
     let query: FirebaseFirestore.Query = firestore.collection("cars");
 
+    const featuredBrandNames = [
+      "Cadillac", "Mercedes-Benz", "Nio", "Gac", "Tesla", 
+      "Land Rover", "Toyota", "BAIC", "Denza", "Lexus"
+    ];
+
+    console.log("\n--- Executing getCars ---");
+    console.log("Received filters:", filters);
+
     if (filters?.listOtherBrands) {
-      const otherBrandsSnapshot = await firestore.collection("brands").where("isFeatured", "==", false).get();
+      console.log("✅ Path: 'More Brands' filter is active.");
+      
+      const otherBrandsSnapshot = await firestore.collection("brands").where("name", "not-in", featuredBrandNames).get();
+      
+      console.log(`Found ${otherBrandsSnapshot.docs.length} brand(s) that are NOT in the featured list.`);
+
       const otherBrandIds = otherBrandsSnapshot.docs.map(doc => doc.id);
+      
       if (otherBrandIds.length > 0) {
+        console.log("Filtering cars by these 'other' brand IDs:", otherBrandIds);
         query = query.where("brandId", "in", otherBrandIds);
       } else {
+        console.log("No 'other' brands found. Returning an empty list.");
         return { success: true, data: [] };
       }
+
     } else if (filters?.brandName) {
+      console.log(`✅ Path: Specific brand filter is active for "${filters.brandName}".`);
       const deSlugifiedName = filters.brandName.replace(/-/g, ' ');
       const formattedBrandName = deSlugifiedName.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
       const brandSnapshot = await firestore.collection("brands").where("name", "==", formattedBrandName).limit(1).get();
+
       if (brandSnapshot.empty) {
+        console.log(`Brand "${formattedBrandName}" not found. Returning empty list.`);
         return { success: true, data: [] };
       }
       const brandId = brandSnapshot.docs[0].id;
+      console.log(`Found brand ID "${brandId}". Applying filter.`);
       query = query.where("brandId", "==", brandId);
+    } else {
+        console.log("✅ Path: No filter provided. Fetching all cars.");
     }
 
     const carsSnapshot = await query.orderBy("createdAt", "desc").get();
+    console.log(`Final Query Result: Found ${carsSnapshot.docs.length} car(s).`);
 
     const carsData = carsSnapshot.docs.map(doc => {
       return {
         id: doc.id,
-        ...(doc.data() as CarDb), // Tell TS this is a CarDb object
+        ...(doc.data() as CarDb),
       };
     });
 
@@ -97,24 +120,23 @@ export async function getCars(filters?: { brandName?: string; listOtherBrands?: 
                 ...car,
                 brandName: "N/A",
                 createdAt: car.createdAt.toDate().toISOString(),
-                updatedAt: car.updatedAt ? car.updatedAt.toDate().toISOString() : undefined,
+                updatedAt: car.updatedAt?.toDate().toISOString(),
             };
         }
         const brandDoc = await firestore.collection("brands").doc(car.brandId).get();
         const brandName = brandDoc.exists ? brandDoc.data()?.name : "Unknown Brand";
         
-        // THIS IS THE CORRECTED RETURN OBJECT
         return { 
             ...car, 
             brandName,
             createdAt: car.createdAt.toDate().toISOString(),
-            updatedAt: car.updatedAt ? car.updatedAt.toDate().toISOString() : undefined,
+            updatedAt: car.updatedAt?.toDate().toISOString(),
         };
       })
     );
     return { success: true, data: carsWithBrands as CarWithBrand[] };
   } catch (error) {
-    console.error("Something went wrong:", error);
+    console.error("--- !!! getCars Function Crashed !!! ---", error);
     return { success: false, error: "Failed to fetch cars." };
   }
 }

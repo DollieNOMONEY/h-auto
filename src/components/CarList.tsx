@@ -5,14 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getCars, type CarWithBrand } from '@/app/_actions/carActions';
 
-export default function CarList({ brandName }: { brandName?: string }) {
+export default function CarList({ brandName, listOtherBrands }: { brandName?: string; listOtherBrands?: boolean }) {
   const [cars, setCars] = useState<CarWithBrand[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
     const fetchCars = async () => {
       setIsLoading(true);
-      const { success, data } = await getCars({ brandName });
+      const { success, data } = await getCars({ brandName, listOtherBrands });
       if (success && data) {
         setCars(data);
       }
@@ -20,7 +20,7 @@ export default function CarList({ brandName }: { brandName?: string }) {
     };
 
     fetchCars();
-  }, [brandName]); 
+  }, [brandName, listOtherBrands]);
 
   function useScreenWidth() {
     const [width, setWidth] = useState(0);
