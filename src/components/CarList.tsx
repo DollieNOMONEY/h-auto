@@ -60,46 +60,55 @@ export default function CarList({ brandName }: { brandName?: string }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-12 mb-12 lg:mb-24">
       {cars.map((car, index) => {
-        const rowIndex = Math.floor(index / groupSize);
-        const isEvenRow = rowIndex % 2 === 0;
-        const colIndex = index % groupSize;
-        const isOnRightSide = colIndex === groupSize - 1 || colIndex === 2;
-        
-        let carOrderClass = isEvenRow ? "order-2" : "order-1";
-        let barOrderClass = isEvenRow ? "order-1" : "order-2";
-        if (screenWidth < 768) {
-            carOrderClass = index % 2 === 0 ? "order-2" : "order-1";
-            barOrderClass = index % 2 === 0 ? "order-1" : "order-2";
-        }
+    const rowIndex = Math.floor(index / groupSize);
+    const isEvenRow = rowIndex % 2 === 0;
+    const colIndex = index % groupSize;
+    const isOnRightSide = colIndex === groupSize - 1 || colIndex === 2;
+    
+    let carOrderClass = isEvenRow ? "order-2" : "order-1";
+    let barOrderClass = isEvenRow ? "order-1" : "order-2";
+    if (screenWidth < 768) {
+        carOrderClass = index % 2 === 0 ? "order-2" : "order-1";
+        barOrderClass = index % 2 === 0 ? "order-1" : "order-2";
+    }
 
-        return (
-          <div key={car.id} 
-            className={`flex justify-center items-start gap-6 w-full transition-all duration-300 ease-out transform 
-              hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md
-              focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2
-              ${isOnRightSide ? "origin-right" : "origin-left"}
-            }`}
-          >
-            <Link href={`/cars/${car.brandName.toLowerCase().replace(/ /g, '-')}/${car.id}`} className={`w-[75%] block cursor-pointer ${carOrderClass}`}>
-              <Image
-                className="w-fit mb-7"
-                src={car.imageUrls[0]} 
-                alt={car.name}        
-                width={500}
-                height={400}
-                priority={index < groupSize}
-              />
-              <p className="text-center text-2xl hover:underline cursor-pointer active:underline focus-visible:underline">{car.name}</p>
-              <p className="text-center uppercase text-sm mb-3">{car.brandName}</p>
-              <div className="flex justify-between">
-                <p className="text-[#daab35] text-sm">{car.price}</p>
-                <p className="text-sm hover:underline cursor-pointer active:underline focus-visible:underline">Car Detail</p>
-              </div>
-            </Link>
-            <div className={`w-1 h-[calc(100%-100px)] mt-auto ml-2 bg-[#daab35] ${barOrderClass}`}></div>
+    // --- FIXES ARE HERE ---
+    // 1. Safely create a URL-friendly slug for the brand name.
+    const brandSlug = (car.brandName || 'other').toLowerCase().replace(/ /g, '-');
+    
+    // 2. Safely get the first image, or use a placeholder if none exist.
+    const imageSrc = car.imageUrls?.[0] || '/img/placeholder.jpg'; // Using optional chaining and a fallback
+    // ----------------------
+
+    return (
+      <div key={car.id} 
+        className={`flex justify-center items-start gap-6 w-full transition-all duration-300 ease-out transform 
+          hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-md
+          focus:outline-none focus:ring-2 focus:ring-[#f3cd4d] focus:ring-offset-2
+          ${isOnRightSide ? "origin-right" : "origin-left"}
+        `}
+      >
+        {/* Use the new safe variables in the Link and Image components */}
+        <Link href={`/cars/${brandSlug}/${car.id}`} className={`w-[75%] block cursor-pointer ${carOrderClass}`}>
+          <Image
+            className="w-fit mb-7"
+            src={imageSrc}
+            alt={car.name}
+            width={500}
+            height={400}
+            priority={index < groupSize}
+          />
+          <p className="text-center text-2xl hover:underline cursor-pointer active:underline focus-visible:underline">{car.name}</p>
+          <p className="text-center uppercase text-sm mb-3">{car.brandName || 'N/A'}</p> {/* Also add a fallback here */}
+          <div className="flex justify-between">
+            <p className="text-[#daab35] text-sm">{car.price}</p>
+            <p className="text-sm hover:underline cursor-pointer active:underline focus-visible:underline">Car Detail</p>
           </div>
-        );
-      })}
+        </Link>
+        <div className={`w-1 h-[calc(100%-100px)] mt-auto ml-2 bg-[#daab35] ${barOrderClass}`}></div>
+      </div>
+    );
+})}
     </div>
   );
 }
