@@ -44,6 +44,7 @@ export default function Navigation() {
                 width={590}
                 height={590}
                 className='object-contain w-10'
+                priority 
               />
             </Link>
 

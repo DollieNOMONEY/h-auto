@@ -3,7 +3,7 @@ import EditCarForm from "@/components/EditCarForm";
 import { notFound } from "next/navigation";
 
 export default async function EditCarPage(props: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await props.params;
 

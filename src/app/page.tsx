@@ -52,7 +52,7 @@ export default function Home() {
       </div>
       
       <div className="inset-0 lg:flex items-center justify-center">
-        <div className="flex flex-col bg-[#000d2a]">
+        <div className="flex flex-col bg-[#000d2a] w-full">
           <h1 className={`mr-5 relative text-4xl mt-12 ml-4 mb-12 z-10 font-serif sm:text-center transition-all duration-500 ${animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`} style={{ transitionDelay: '500ms' }}>GARAGE</h1>
           <CarList/>
           <div>

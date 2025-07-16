@@ -54,7 +54,7 @@ export default function CarList({ brandName }: { brandName?: string }) {
   }
 
   if (cars.length === 0) {
-    return <p className="text-center text-gray-400 mb-24">There are no cars.</p>;
+    return <p className="text-center text-gray-400 mb-24">No cars available.</p>;
   }
 
   return (

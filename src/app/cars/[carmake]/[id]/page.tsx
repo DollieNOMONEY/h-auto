@@ -3,11 +3,12 @@ import CarDetailClient from "@/components/CarDetailClient";
 import { notFound } from "next/navigation";
 
 interface CarDetailPageProps {
-  params: { carmake: string; id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function CarPage(props: CarDetailPageProps) {
-  const { id } = props.params;
+  //const { id } = props.params;
+  const { id } = await props.params;
 
   const { success, data: car } = await getCarById(id);
 
