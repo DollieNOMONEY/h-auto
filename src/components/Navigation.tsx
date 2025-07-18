@@ -7,17 +7,15 @@ export default function Navigation() {
   const [menuOpened, setMenuOpened] = useState(false);
 
   function openMenu() {
+    if (!menuOpened) {
+      // Find the scroller using its class name
+      const scroller = document.querySelector('.wrapper');
+      
+      // Scroll it to the top
+      scroller?.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     setMenuOpened(!menuOpened);
   }
-
-  // Prevent background scroll when menu is open
-  useEffect(() => {
-    if (menuOpened) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [menuOpened]);
 
   useEffect(() => {
     function handleResize() {
@@ -86,7 +84,7 @@ export default function Navigation() {
               className='fixed inset-0 bg-[#000000a3] backdrop-blur-sm z-40 opacity-100 transition-opacity duration-300 ease-out'
             >
               <div
-                className='flex flex-col justify-start bg-[#001135] top-0 left-0 h-full w-full p-6 space-y-4 overflow-y-auto'
+                className='flex flex-col justify-start bg-[#001135] top-0 left-0 h-auto w-full p-6 space-y-4'
               >
                 <div className='mb-12'/>
                 {/* <input

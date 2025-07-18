@@ -13,7 +13,7 @@ export default function Cars() {
   }, []);
 
   return (
-    <div className={`text-xl mb-5 mx-3 ${animate ? 'fade-in' : 'opacity-0'}`}>
+    <div className={`wrapper text-xl mb-5  ${animate ? 'fade-in' : 'opacity-0'}`}>
         <Navigation/>
         <div className='inset-0 flex items-center justify-center lg:mx-24'>
           <div>

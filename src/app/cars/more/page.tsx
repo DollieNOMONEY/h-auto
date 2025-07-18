@@ -7,7 +7,7 @@ export default function MoreCarsPage() {
     <div className="bg-[#001135]">
       <Navigation />
       
-      <div className='mx-1'>
+      <div className=''>
         <p className="text-4xl text-center my-12 font-serif">
           More Brands
         </p>

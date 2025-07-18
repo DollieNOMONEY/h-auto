@@ -62,8 +62,8 @@ export async function getCars(filters?: { brandName?: string; listOtherBrands?: 
     let query: FirebaseFirestore.Query = firestore.collection("cars");
 
     const featuredBrandNames = [
-      "Cadillac", "Mercedes-Benz", "Nio", "Gac", "Tesla", 
-      "Land Rover", "Toyota", "BAIC", "Denza", "Lexus"
+      "Cadillac", "Mercedes Benz", "Nio", "Gac", "Tesla", 
+      "Land Rover", "Toyota", "Baic", "Denza", "Lexus"
     ];
 
     console.log("\n--- Executing getCars ---");
