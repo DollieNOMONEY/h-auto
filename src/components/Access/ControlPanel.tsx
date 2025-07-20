@@ -4,7 +4,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/lib/firebase';
-import { signOut } from 'firebase/auth';
+import { signOut, sendPasswordResetEmail } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
 export default function ControlPanel() {
@@ -26,6 +26,24 @@ export default function ControlPanel() {
     }
   };
 
+  const handlePasswordReset = async () => {
+    if (!user || !user.email) {
+      alert("Could not find user email.");
+      return;
+    }
+
+    const confirmed = window.confirm(`Send a password reset link to ${user.email}?`);
+    if (confirmed) {
+        try {
+            await sendPasswordResetEmail(auth, user.email);
+            alert("Password reset email sent! Please check your inbox.");
+        } catch (error) {
+            console.error("Error sending password reset email: ", error);
+            alert("Failed to send password reset email.");
+        }
+    }
+  };
+
 
   if (loading) {
     return null;
@@ -43,6 +61,12 @@ export default function ControlPanel() {
           onClick={(e) => e.stopPropagation()}>
             <div className='flex flex-col justify-center'>
               <Link href="/add-image-acp" className="bg-[#daab35] py-2 px-1 font-bold border-[1px] text-sm mb-4 text-center">+ Add Car</Link>
+              <button 
+                onClick={handlePasswordReset}
+                className="bg-blue-600 py-2 px-1 font-bold border-[1px] text-sm mb-4 text-white"
+              >
+                Change Password
+              </button>
               <button 
                 onClick={handleLogout}
                 className="bg-red-600 py-2 px-1 font-bold border-[1px] text-sm text-white"
